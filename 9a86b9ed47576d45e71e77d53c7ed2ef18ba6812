@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da9b358b_a310b04f",
+        "filename": "crosses_zeroes/src/crosses_zeroes/ButtonController.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1007635
+      },
+      "writtenOn": "2016-03-27T18:25:14Z",
+      "side": 1,
+      "message": "Why not to create an interface in which these constants will be defined? And all classes that implement this interface will see them. And you won\u0027t need to write this piece of code in every class.",
+      "revId": "9a86b9ed47576d45e71e77d53c7ed2ef18ba6812",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_83348cde",
+        "filename": "crosses_zeroes/src/crosses_zeroes/GameLogic.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1007635
+      },
+      "writtenOn": "2016-03-27T18:25:14Z",
+      "side": 1,
+      "message": "Why not to create an interface in which these constants will be defined?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 39
+      },
+      "revId": "9a86b9ed47576d45e71e77d53c7ed2ef18ba6812",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_434d6471",
+        "filename": "crosses_zeroes/src/crosses_zeroes/UserInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1007635
+      },
+      "writtenOn": "2016-03-27T18:25:14Z",
+      "side": 1,
+      "message": "Maybe make some logical spaces here, cause it\u0027s hard to read this piese",
+      "revId": "9a86b9ed47576d45e71e77d53c7ed2ef18ba6812",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_03575c03",
+        "filename": "crosses_zeroes/src/crosses_zeroes/UserInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1007635
+      },
+      "writtenOn": "2016-03-27T18:25:14Z",
+      "side": 1,
+      "message": "Use ToggleGroup. If you add some radiobuttons to ToggleGroup, then only one of them can be selected, so you do not need to make it yourself. I guess you need 2 ToggleGroup, one for difficulty, another for size of field.",
+      "range": {
+        "startLine": 68,
+        "startChar": 1,
+        "endLine": 69,
+        "endChar": 37
+      },
+      "revId": "9a86b9ed47576d45e71e77d53c7ed2ef18ba6812",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
