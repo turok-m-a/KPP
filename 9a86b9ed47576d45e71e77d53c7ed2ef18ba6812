@@ -19,6 +19,57 @@
     },
     {
       "key": {
+        "uuid": "da9b358b_83b92c31",
+        "filename": "crosses_zeroes/src/crosses_zeroes/ButtonController.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1007608
+      },
+      "writtenOn": "2016-03-27T18:57:19Z",
+      "side": 1,
+      "message": "why 4. make private static int",
+      "revId": "9a86b9ed47576d45e71e77d53c7ed2ef18ba6812",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_e3a918e1",
+        "filename": "crosses_zeroes/src/crosses_zeroes/ButtonController.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1007608
+      },
+      "writtenOn": "2016-03-27T18:57:19Z",
+      "side": 1,
+      "message": "stepped outside",
+      "revId": "9a86b9ed47576d45e71e77d53c7ed2ef18ba6812",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_a3ac30ee",
+        "filename": "crosses_zeroes/src/crosses_zeroes/ButtonController.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1007608
+      },
+      "writtenOn": "2016-03-27T18:57:19Z",
+      "side": 1,
+      "message": "make more spaces",
+      "revId": "9a86b9ed47576d45e71e77d53c7ed2ef18ba6812",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da9b358b_83348cde",
         "filename": "crosses_zeroes/src/crosses_zeroes/GameLogic.java",
         "patchSetId": 4
@@ -53,6 +104,23 @@
       "writtenOn": "2016-03-27T18:25:14Z",
       "side": 1,
       "message": "Maybe make some logical spaces here, cause it\u0027s hard to read this piese",
+      "revId": "9a86b9ed47576d45e71e77d53c7ed2ef18ba6812",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_43820454",
+        "filename": "crosses_zeroes/src/crosses_zeroes/UserInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1007608
+      },
+      "writtenOn": "2016-03-27T18:57:19Z",
+      "side": 1,
+      "message": "make more logical spaces",
       "revId": "9a86b9ed47576d45e71e77d53c7ed2ef18ba6812",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
@@ -98,6 +166,29 @@
         "startChar": 13,
         "endLine": 13,
         "endChar": 17
+      },
+      "revId": "9a86b9ed47576d45e71e77d53c7ed2ef18ba6812",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_23870063",
+        "filename": "crosses_zeroes/src/crosses_zeroes/main.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1007608
+      },
+      "writtenOn": "2016-03-27T18:57:19Z",
+      "side": 1,
+      "message": "must be private static int",
+      "range": {
+        "startLine": 22,
+        "startChar": 46,
+        "endLine": 22,
+        "endChar": 47
       },
       "revId": "9a86b9ed47576d45e71e77d53c7ed2ef18ba6812",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
