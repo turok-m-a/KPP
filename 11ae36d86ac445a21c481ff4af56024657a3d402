@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da9b358b_3144e572",
+        "filename": "crosses_zeroes/src/crosses_zeroes/ButtonController.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1007608
+      },
+      "writtenOn": "2016-03-29T14:19:20Z",
+      "side": 1,
+      "message": "code and its comments should\"t overstep the dashed line",
+      "revId": "11ae36d86ac445a21c481ff4af56024657a3d402",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_917e11ad",
+        "filename": "crosses_zeroes/src/crosses_zeroes/ButtonController.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1007608
+      },
+      "writtenOn": "2016-03-29T14:19:20Z",
+      "side": 1,
+      "message": "out of space",
+      "revId": "11ae36d86ac445a21c481ff4af56024657a3d402",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_71638d1b",
+        "filename": "crosses_zeroes/src/crosses_zeroes/ButtonController.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1007608
+      },
+      "writtenOn": "2016-03-29T14:19:20Z",
+      "side": 1,
+      "message": "out of space, not good",
+      "revId": "11ae36d86ac445a21c481ff4af56024657a3d402",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_f1779dd2",
+        "filename": "crosses_zeroes/src/crosses_zeroes/ButtonController.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1007608
+      },
+      "writtenOn": "2016-03-29T14:19:20Z",
+      "side": 1,
+      "message": "please delete all of this red areas",
+      "revId": "11ae36d86ac445a21c481ff4af56024657a3d402",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_f15e7d44",
+        "filename": "crosses_zeroes/src/crosses_zeroes/GameLogic.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1007608
+      },
+      "writtenOn": "2016-03-29T14:19:20Z",
+      "side": 1,
+      "message": "code and its comments should\u0027t overstep the dashed line",
+      "revId": "11ae36d86ac445a21c481ff4af56024657a3d402",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_d15b7953",
+        "filename": "crosses_zeroes/src/crosses_zeroes/GameLogic.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1007608
+      },
+      "writtenOn": "2016-03-29T14:19:20Z",
+      "side": 1,
+      "message": "delete red areas",
+      "revId": "11ae36d86ac445a21c481ff4af56024657a3d402",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_1140c155",
+        "filename": "crosses_zeroes/src/crosses_zeroes/GameLogic.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1007608
+      },
+      "writtenOn": "2016-03-29T14:19:20Z",
+      "side": 1,
+      "message": "if \"x\" and \"y\" are popositions. please rename it to \"posX\" and \"posY\"",
+      "revId": "11ae36d86ac445a21c481ff4af56024657a3d402",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_b158f557",
+        "filename": "crosses_zeroes/src/crosses_zeroes/GameLogic.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1007608
+      },
+      "writtenOn": "2016-03-29T14:19:20Z",
+      "side": 1,
+      "message": "what is \"k\"?",
+      "revId": "11ae36d86ac445a21c481ff4af56024657a3d402",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_d12259b9",
+        "filename": "crosses_zeroes/src/crosses_zeroes/GameLogic.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1007608
+      },
+      "writtenOn": "2016-03-29T14:19:20Z",
+      "side": 1,
+      "message": "what is 2? make final",
+      "revId": "11ae36d86ac445a21c481ff4af56024657a3d402",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_71182d85",
+        "filename": "crosses_zeroes/src/crosses_zeroes/UserInterface.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1007608
+      },
+      "writtenOn": "2016-03-29T14:19:20Z",
+      "side": 1,
+      "message": "what is \"b\", \"f\", \"r\"?",
+      "revId": "11ae36d86ac445a21c481ff4af56024657a3d402",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_b12fd5a0",
+        "filename": "crosses_zeroes/src/crosses_zeroes/UserInterface.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1007608
+      },
+      "writtenOn": "2016-03-29T14:19:20Z",
+      "side": 1,
+      "message": "delete red areas",
+      "revId": "11ae36d86ac445a21c481ff4af56024657a3d402",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
