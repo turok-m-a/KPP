@@ -1,0 +1,175 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da9b358b_605a9085",
+        "filename": "crosses_zeroes/src/crosses_zeroes/ButtonController.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1007608
+      },
+      "writtenOn": "2016-03-30T20:09:45Z",
+      "side": 1,
+      "message": "Where \"private\" or \"public\" attributes for variables",
+      "revId": "5a65597f78df86471bd63a642021399749db0902",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_e077c000",
+        "filename": "crosses_zeroes/src/crosses_zeroes/Constants.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1007608
+      },
+      "writtenOn": "2016-03-30T20:09:45Z",
+      "side": 1,
+      "message": "why static?? remove it and make only for example \"final int MEDIUM \u003d 3;\"",
+      "revId": "5a65597f78df86471bd63a642021399749db0902",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_405f8c72",
+        "filename": "crosses_zeroes/src/crosses_zeroes/GameLogic.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1007608
+      },
+      "writtenOn": "2016-03-30T20:09:45Z",
+      "side": 1,
+      "message": "Where \"private\" or \"public\" attributes for variables",
+      "revId": "5a65597f78df86471bd63a642021399749db0902",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_a0c77811",
+        "filename": "crosses_zeroes/src/crosses_zeroes/GameLogic.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1007608
+      },
+      "writtenOn": "2016-03-30T20:09:45Z",
+      "side": 1,
+      "message": "what is \"i\" and \"j\"?",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 257,
+        "endChar": 13
+      },
+      "revId": "5a65597f78df86471bd63a642021399749db0902",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_0052a467",
+        "filename": "crosses_zeroes/src/crosses_zeroes/GameLogic.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1007608
+      },
+      "writtenOn": "2016-03-30T20:09:45Z",
+      "side": 1,
+      "message": "why \"1\"?",
+      "range": {
+        "startLine": 265,
+        "startChar": 16,
+        "endLine": 265,
+        "endChar": 17
+      },
+      "revId": "5a65597f78df86471bd63a642021399749db0902",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_e04ea0c0",
+        "filename": "crosses_zeroes/src/crosses_zeroes/GameLogic.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1007608
+      },
+      "writtenOn": "2016-03-30T20:09:45Z",
+      "side": 1,
+      "message": "why \"3\"?",
+      "revId": "5a65597f78df86471bd63a642021399749db0902",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_00006433",
+        "filename": "crosses_zeroes/src/crosses_zeroes/GameReplay.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1007608
+      },
+      "writtenOn": "2016-03-30T20:09:45Z",
+      "side": 1,
+      "message": "Where \"private\" or \"public\" attributes for variables",
+      "revId": "5a65597f78df86471bd63a642021399749db0902",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_60e8507d",
+        "filename": "crosses_zeroes/src/crosses_zeroes/Main.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1007608
+      },
+      "writtenOn": "2016-03-30T20:09:45Z",
+      "side": 1,
+      "message": "if this sceen size, it\u0027s should be \"final\"",
+      "range": {
+        "startLine": 39,
+        "startChar": 38,
+        "endLine": 39,
+        "endChar": 46
+      },
+      "revId": "5a65597f78df86471bd63a642021399749db0902",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_20036844",
+        "filename": "crosses_zeroes/src/crosses_zeroes/UserInterface.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1007608
+      },
+      "writtenOn": "2016-03-30T20:09:45Z",
+      "side": 1,
+      "message": "Where \"private\" or \"public\" attributes for variables",
+      "revId": "5a65597f78df86471bd63a642021399749db0902",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
