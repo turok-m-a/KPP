@@ -1,16 +1,17 @@
 package crosses_zeroes;
 
+import java.io.File;
 import java.util.Random;
 
 /**
  * contains A.I. algorithms, stores current game state
  */
 public class GameLogic implements Constants {
-  private int fieldArray[][] = {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}};
-  int fieldSize = 3;
-  private int turn = 0;
-  int difficultyLevel = MEDIUM;
-  boolean autoGameEnabled = false; // A.I. vs A.I.
+  public int fieldArray[][] = {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}};
+  public int fieldSize = DEFAULT_FIELD_SIZE;
+  public int turn = 0;
+  public int difficultyLevel = MEDIUM;
+  public boolean autoGameEnabled = false; // A.I. vs A.I.
   /**
    * {@value this.fieldSize} grid size
    * {@value this.turn} current turn
@@ -20,7 +21,8 @@ public class GameLogic implements Constants {
   //A.I. plays "zeros" , user plays "crosses"
   private int playerMark = CROSS_MARK, aIMark = ZERO_MARK;
   private Random randomGenerator = new Random();
-
+  private GameReplay replayModule = new GameReplay();
+  File gameStateFile;
   /**
    * sets if A.I. puts "0" or "x" to grid
    *
@@ -42,7 +44,6 @@ public class GameLogic implements Constants {
    *
    * @return number of cell to put "aIMark" if fork was prevented, or NOTHING_TO_PREVENT
    */
-
   int blockFork() {
     int firstAIMark, firstAIMarkRow, firstAIMarkColumn;
     for (int i = 0; i < fieldSize; i++)
@@ -225,6 +226,7 @@ public class GameLogic implements Constants {
    * reset grid state to initial
    */
   void resetLogic() {
+    fieldArray = new int[fieldSize][fieldSize];
     for (int i = 0; i < fieldSize; i++)
       for (int j = 0; j < fieldSize; j++) {
         fieldArray[i][j] = EMPTY_MARK;
@@ -233,56 +235,72 @@ public class GameLogic implements Constants {
     aIMark = ZERO_MARK;
     turn = 0;   //first turn
     autoGameEnabled = false;
+    replayModule.resetReplay();
   }
 
   /**
-   * put "x", then decide, where to put "0"
-   *
-   * @param posX coordinates of "x"
+   * put "x", then decide, where to put "0" (player vs A.I. mode)
+   * decide where to put "x" or "0" (A.I. vs A.I. mode)
+   * @param posX coordinates of "x" or "0"
    * @param posY
    * @return number of cell to put "0" , "-1" if game is over
    */
   int checkCell(int posX, int posY) {
     fieldArray[posY][posX] = playerMark;
-    int i, j;
+    if (!autoGameEnabled ) {            // no need to add, in autogame mode it was
+    replayModule.addCurrentState(this); // added on previous turn .
+    //add new state after each turn
+    turn++;// count turns for two players. in autogame mode this function is called once for each
+    }      // turn of zeros and crosses. when autogame mode disabled this function is called once
+    // for each pair of turns
+    int row, column;
     if (checkWin() != GAME_IS_NOT_OVER) {   // if player wins on this turn
+      replayModule.addCurrentState(this);
+      turn ++;
       return NO_RESULT;            // do nothing
     }
     turn++;
 
-    if (turn == 1 && difficultyLevel > EASY) {
+    if (turn == FIRST_TURN && difficultyLevel > EASY) {
       int cellNumber = getOppositePosition(posX, posY); // if player puts mark to corner or to
-      i = cellNumber / fieldSize;                       // side, put to opposite corner (side)
-      j = cellNumber % fieldSize;
-      if (!autoGameEnabled)
-        fieldArray[i][j] = aIMark;
+      row = cellNumber / fieldSize;                       // side, put to opposite corner (side)
+      column = cellNumber % fieldSize;
+      if (!autoGameEnabled) {
+        fieldArray[row][column] = aIMark;
+      }
+      replayModule.addCurrentState(this);
       return cellNumber;
     }
 
     int cellNumber;
-    if (turn >= 3) {                    // check, if A.I. can win right on this turn
+    if (turn >= THIRD_TURN) {                    // check, if A.I. can win right on this turn
       cellNumber = checkAIWinPossibility(0);
       if (cellNumber != NO_POSSIBILITY) {
-        i = cellNumber / fieldSize;
-        j = cellNumber % fieldSize;
-        if (!autoGameEnabled)
-          fieldArray[i][j] = aIMark;
+        row = cellNumber / fieldSize;
+        column = cellNumber % fieldSize;
+        if (!autoGameEnabled) {
+          fieldArray[row][column] = aIMark;
+        }
+        replayModule.addCurrentState(this);
         return cellNumber;
       }
     }
 
     cellNumber = blockPlayerWin();            // prevent player to win if he can put 3-rd (4-th)
     if (cellNumber != NOTHING_TO_PREVENT) {   // in row on next turn
-      i = cellNumber / fieldSize;
-      j = cellNumber % fieldSize;
-      if (!autoGameEnabled)
-        fieldArray[i][j] = aIMark;
+      row = cellNumber / fieldSize;
+      column = cellNumber % fieldSize;
+      if (!autoGameEnabled) {
+        fieldArray[row][column] = aIMark;
+      }
+      replayModule.addCurrentState(this);
       return cellNumber;
     }
 
     if (difficultyLevel > MEDIUM) {      // prevent player to make fork
       cellNumber = blockFork();          // if such possibility exists
       if (cellNumber != NOTHING_TO_PREVENT) {
+        replayModule.addCurrentState(this);
         return cellNumber;
       }
     }
@@ -290,11 +308,12 @@ public class GameLogic implements Constants {
     // check, if A.I. can put mark in row to win on next turns
     cellNumber = checkAIWinPossibility(1);
     if (cellNumber != NO_RESULT) {
-      i = cellNumber / fieldSize;
-      j = cellNumber % fieldSize;
+      row = cellNumber / fieldSize;
+      column = cellNumber % fieldSize;
       if (!autoGameEnabled) {
-        fieldArray[i][j] = aIMark;
+        fieldArray[row][column] = aIMark;
       }
+      replayModule.addCurrentState(this);
       return cellNumber;
     }
 
@@ -308,18 +327,18 @@ public class GameLogic implements Constants {
         direction = -1;                                // opposite search direction
         continue;
       }
-      i = cellNumber / fieldSize;
-      j = cellNumber % fieldSize;
-      if (fieldArray[i][j] == EMPTY_MARK) {
+      row = cellNumber / fieldSize;
+      column = cellNumber % fieldSize;
+      if (fieldArray[row][column] == EMPTY_MARK) {
         if (!autoGameEnabled) {
-          fieldArray[i][j] = aIMark;
+          fieldArray[row][column] = aIMark;
         }
         break;
       }
     }
-    return (i * fieldSize + j);                        // cell number
+    replayModule.addCurrentState(this);
+    return (row * fieldSize + column);                        // cell number
   }
-
   int getCell(int x, int y) {
     return fieldArray[y][x];
   }
@@ -365,5 +384,31 @@ public class GameLogic implements Constants {
       return DRAW; // if all cell are occupied and no win combination match nobody wins
     }
     return GAME_IS_NOT_OVER;
+  }
+  /**
+   * saves replay for this field
+   * @param replayFile file to save
+   */
+  void saveReplay(File replayFile){
+    replayModule.saveGame(replayFile, this);
+  }
+  /**
+   * loads next turn from replay
+   * @return true on success, false if next turn doesn`t exist
+   */
+  boolean loadTurnFromReplay(){
+    //if (replayModule.currentReplayableTurn >= turn) {
+    if (replayModule.gameStates.size() <= replayModule.currentReplayableTurn) {
+      return false;
+    }
+    fieldArray = replayModule.getNextState();
+    return true;
+  }
+  /**
+   * loads replay for this field
+   * @param replayFile file to load
+   */
+  void loadReplay(File replayFile){
+    replayModule.loadGame(replayFile, this);
   }
 }
