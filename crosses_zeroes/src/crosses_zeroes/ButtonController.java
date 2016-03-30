@@ -1,5 +1,6 @@
 package crosses_zeroes;
 
+import java.io.File;
 import java.util.Random;
 
 import javafx.animation.AnimationTimer;
@@ -18,15 +19,15 @@ import javafx.stage.Stage;
  *
  */
 public class ButtonController implements Constants {
-  int fieldSize = 3;
-  Image imageZero;
-  Image imageCross;
-  Image imageEmpty;
+  private int fieldSize = 3;
+  private Image imageZero;
+  private Image imageCross;
+  private Image imageEmpty;
   Button[][] arrayOfButtons;
   GameLogic field;
   Stage stage;
   int cellNumber, result;
-  boolean makeMoveAsZero;
+  private boolean makeMoveAsZero;
 
   ButtonController(Button[][] tempArrayOfButtons, GameLogic tempField, Stage tempStage) {
     arrayOfButtons = tempArrayOfButtons;
@@ -50,7 +51,6 @@ public class ButtonController implements Constants {
       for (int j = 0; j < fieldSize; j++) {
         arrayOfButtons[i][j].setGraphic(new ImageView(imageEmpty));
       }
-    field.resetLogic();
   }
 
   /**
@@ -86,6 +86,12 @@ public class ButtonController implements Constants {
    */
   void initButtons() {
     field.resetLogic();
+    changeFieldSize();
+  }
+  /**
+   * change size of field
+   */
+  void changeFieldSize(){
     resetButtons();
     for (int i = 0; i < MAX_FIELD_SIZE; i++)
       for (int j = 0; j < MAX_FIELD_SIZE; j++) {
@@ -155,11 +161,11 @@ public class ButtonController implements Constants {
   /**
    * animation timer is used to update GUI during auto game
    */
-  protected AnimationTimer at = new AnimationTimer() {
+  protected AnimationTimer autoGameTimer = new AnimationTimer() {
     @Override
     public void handle(long now) {
       if (autoGameTurn() == STOP_AUTO_GAME) {
-        at.stop();
+        autoGameTimer.stop();
         field.switchMode(ZERO_MARK);
         makeMove(0, 0);                 // call this function to show message
         field.autoGameEnabled = false;
@@ -170,6 +176,7 @@ public class ButtonController implements Constants {
    * launch auto game (A.I. vs A.I.)
    */
   void autoGame() {
+    resetButtons();
     field.autoGameEnabled = true;
     if (field.checkWin() != GAME_IS_NOT_OVER) {
       return;
@@ -184,7 +191,56 @@ public class ButtonController implements Constants {
         .setGraphic(new ImageView(imageCross));
     arrayOfButtons[result / field.fieldSize][result % field.fieldSize]
         .setGraphic(new ImageView(imageZero));
-    at.start(); // subsequent turns
+    autoGameTimer.start(); // subsequent turns
+  }
+  protected AnimationTimer replayTimer = new AnimationTimer() {
+    @Override
+    public void handle(long now) {
+      if (showReplayTurn() == STOP_REPLAY) {
+        replayTimer.stop();
+        int gameState = field.checkWin();
+        if (gameState != GAME_IS_NOT_OVER) {
+          showGameOverMessage(field.checkWin());
+        }
+      }
+    }
+  };
+
+  int showReplayTurn() {
+    if (field.loadTurnFromReplay() == false) {
+      return STOP_REPLAY;
+    }
+    try {
+      Thread.sleep(500); // make a pause so user is able to see sequence of turns
+    } catch (InterruptedException e) {
+    }
+    for (int i = 0; i < fieldSize; i++) {
+      for (int j = 0; j < fieldSize; j++) {
+        switch (field.fieldArray[i][j]) {
+          case EMPTY_MARK: {
+            arrayOfButtons[i][j].setGraphic(new ImageView(imageEmpty));
+          }
+            break;
+          case ZERO_MARK: {
+            arrayOfButtons[i][j].setGraphic(new ImageView(imageZero));
+          }
+            break;
+          case CROSS_MARK: {
+            arrayOfButtons[i][j].setGraphic(new ImageView(imageCross));
+          }
+            break;
+          default:
+            break;
+        }
+      }
+    }
+    return 0;
+  }
+  void showReplay(File gameReplayFile){
+    field.loadReplay(gameReplayFile);
+    fieldSize = field.fieldSize;
+    changeFieldSize();
+    replayTimer.start();
   }
 
   /**
@@ -207,50 +263,8 @@ public class ButtonController implements Constants {
     }
 
     int gameState = field.checkWin();
-    if (gameState != GAME_IS_NOT_OVER) {      //create scene to display message to user
-      blockButtons();
-      Pane messagePane = new Pane();
-      Scene previousScene = stage.getScene(); // save current scene
-      Scene messageScene = new Scene(messagePane, 300, 110);
-
-      Label winMessage = new Label();
-
-      Button closeButton = new Button();
-      closeButton.setTranslateY(50);
-      closeButton.setTranslateX(110);
-      closeButton.setText("Закрыть");
-
-      winMessage.setTranslateX(100);
-      winMessage.setTranslateY(10);
-
-      messagePane.getChildren().add(closeButton);
-      messagePane.getChildren().add(winMessage);
-
-      closeButton.setOnAction(new EventHandler<ActionEvent>() {
-        @Override
-        public void handle(ActionEvent event) {
-          stage.setScene(previousScene);      // restore previous scene
-        }
-      });
-
-      switch (gameState) {
-        case DRAW: {
-          winMessage.setText("Ничья!");
-        }
-          break;
-        case CROSSES_WIN: {
-          winMessage.setText("Победа крестиков!");
-        }
-          break;
-        case ZEROS_WIN: {
-          winMessage.setText("Победа ноликов!");
-        }
-          break;
-        default:
-          break;
-      }
-      stage.setScene(messageScene);                 // show scene with message
-      stage.show();
+    if (gameState != GAME_IS_NOT_OVER) { 
+      showGameOverMessage(gameState);
     }
 
     if (result != NO_RESULT && (!field.autoGameEnabled)) { // for autogame mode it
@@ -258,5 +272,55 @@ public class ButtonController implements Constants {
       j = result % fieldSize;                              // Animation Timer
       arrayOfButtons[i][j].setGraphic(new ImageView(imageZero));
     }
+  }
+  /**
+   * shows game over message
+   * @param gameState current game state
+   */
+  void showGameOverMessage(int gameState) {
+    blockButtons();
+    Pane messagePane = new Pane();
+    Scene previousScene = stage.getScene(); // save current scene
+    // create scene to display message to user
+    Scene messageScene = new Scene(messagePane, 300, 110);
+
+    Label winMessage = new Label();
+
+    Button closeButton = new Button();
+    closeButton.setTranslateY(50);
+    closeButton.setTranslateX(110);
+    closeButton.setText("Закрыть");
+
+    winMessage.setTranslateX(100);
+    winMessage.setTranslateY(10);
+
+    messagePane.getChildren().add(closeButton);
+    messagePane.getChildren().add(winMessage);
+
+    closeButton.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        stage.setScene(previousScene); // restore previous scene
+      }
+    });
+
+    switch (gameState) {
+      case DRAW: {
+        winMessage.setText("Ничья!");
+      }
+        break;
+      case CROSSES_WIN: {
+        winMessage.setText("Победа крестиков!");
+      }
+        break;
+      case ZEROS_WIN: {
+        winMessage.setText("Победа ноликов!");
+      }
+        break;
+      default:
+        break;
+    }
+    stage.setScene(messageScene); // show scene with message
+    stage.show();
   }
 }
