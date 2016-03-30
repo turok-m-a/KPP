@@ -1,5 +1,6 @@
 package crosses_zeroes;
 
+import java.io.File;
 import java.util.Random;
 
 import javafx.animation.AnimationTimer;
@@ -50,7 +51,6 @@ public class ButtonController implements Constants {
       for (int j = 0; j < fieldSize; j++) {
         arrayOfButtons[i][j].setGraphic(new ImageView(imageEmpty));
       }
-    field.resetLogic();
   }
 
   /**
@@ -86,6 +86,12 @@ public class ButtonController implements Constants {
    */
   void initButtons() {
     field.resetLogic();
+    changeFieldSize();
+  }
+  /**
+   * change size of field
+   */
+  void changeFieldSize(){
     resetButtons();
     for (int i = 0; i < MAX_FIELD_SIZE; i++)
       for (int j = 0; j < MAX_FIELD_SIZE; j++) {
@@ -155,11 +161,11 @@ public class ButtonController implements Constants {
   /**
    * animation timer is used to update GUI during auto game
    */
-  protected AnimationTimer at = new AnimationTimer() {
+  protected AnimationTimer autoGameTimer = new AnimationTimer() {
     @Override
     public void handle(long now) {
       if (autoGameTurn() == STOP_AUTO_GAME) {
-        at.stop();
+        autoGameTimer.stop();
         field.switchMode(ZERO_MARK);
         makeMove(0, 0);                 // call this function to show message
         field.autoGameEnabled = false;
@@ -170,6 +176,7 @@ public class ButtonController implements Constants {
    * launch auto game (A.I. vs A.I.)
    */
   void autoGame() {
+    resetButtons();
     field.autoGameEnabled = true;
     if (field.checkWin() != GAME_IS_NOT_OVER) {
       return;
@@ -184,7 +191,55 @@ public class ButtonController implements Constants {
         .setGraphic(new ImageView(imageCross));
     arrayOfButtons[result / field.fieldSize][result % field.fieldSize]
         .setGraphic(new ImageView(imageZero));
-    at.start(); // subsequent turns
+    autoGameTimer.start(); // subsequent turns
+  }
+  protected AnimationTimer replayTimer = new AnimationTimer() {
+    @Override
+    public void handle(long now) {
+      if (showReplayTurn() == STOP_REPLAY) {
+        replayTimer.stop();
+      }
+    }
+  };
+
+  int showReplayTurn() {
+    if (field.loadTurnFromReplay() == false) {
+      return STOP_REPLAY;
+    }
+    try {
+      Thread.sleep(500); // make a pause so user is able to see sequence of turns
+    } catch (InterruptedException e) {
+    }
+    System.out.println("!");
+    for (int i = 0; i < fieldSize; i++) {
+      for (int j = 0; j < fieldSize; j++) {
+        System.out.print(field.fieldArray[i][j]);
+        switch (field.fieldArray[i][j]) {
+          case EMPTY_MARK: {
+            arrayOfButtons[i][j].setGraphic(new ImageView(imageEmpty));
+          }
+            break;
+          case ZERO_MARK: {
+            arrayOfButtons[i][j].setGraphic(new ImageView(imageZero));
+          }
+            break;
+          case CROSS_MARK: {
+            arrayOfButtons[i][j].setGraphic(new ImageView(imageCross));
+          }
+            break;
+          default:
+            break;
+        }
+      }
+      System.out.println();
+    }
+    return 0;
+  }
+  void showReplay(File gameReplayFile){
+    field.loadReplay(gameReplayFile);
+    fieldSize = field.fieldSize;
+    changeFieldSize();
+    replayTimer.start();
   }
 
   /**

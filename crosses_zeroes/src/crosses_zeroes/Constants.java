@@ -21,4 +21,5 @@ public interface Constants {
   static final int STOP_AUTO_GAME = 1;
   static final int BELONGS_TO_WIN_COMBINATION = 1;
   static final int DOESNT_BELONG_TO_WIN_COMBINATION = 0;
+  static final int STOP_REPLAY = 1;
 }

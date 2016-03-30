@@ -33,10 +33,10 @@ public class Main extends Application implements Constants {
     ButtonController buttons = new ButtonController(arrayOfButtons, field, primaryStage);
     buttons.initButtons();
 
-    UserInterface ui = new UserInterface(buttons, field, root);
+    UserInterface ui = new UserInterface(buttons, field, root, primaryStage);
     ui.init();
 
-    Scene mainScene = new Scene(root, 350, 130);
+    Scene mainScene = new Scene(root, 450, 130);
     primaryStage.setScene(mainScene);
     primaryStage.setResizable(false);
     primaryStage.show();
