@@ -23,6 +23,8 @@ public class Main extends Application implements Constants {
     // grid MAX_FIELD_SIZE x MAX_FIELD_SIZE
     Button arrayOfButtons[][] = new Button[MAX_FIELD_SIZE][MAX_FIELD_SIZE];
     GridPane grid = new GridPane();
+    grid.setTranslateX(10);
+    grid.setTranslateY(10);
     GameLogic field = new GameLogic();
     for (int i = 0; i < MAX_FIELD_SIZE; i++)
       for (int j = 0; j < MAX_FIELD_SIZE; j++) {

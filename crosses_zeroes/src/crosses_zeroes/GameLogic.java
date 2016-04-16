@@ -261,7 +261,7 @@ public class GameLogic implements Constants {
     }
     turn++;
 
-    if (turn == FIRST_TURN && difficultyLevel > EASY) {
+    if (turn == SECOND_TURN && difficultyLevel > EASY) {
       int cellNumber = getOppositePosition(posX, posY); // if player puts mark to corner or to
       row = cellNumber / fieldSize;                       // side, put to opposite corner (side)
       column = cellNumber % fieldSize;
