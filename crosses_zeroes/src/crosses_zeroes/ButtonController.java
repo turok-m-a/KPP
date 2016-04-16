@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * controls array of buttons
@@ -28,7 +29,7 @@ public class ButtonController implements Constants {
   private Stage stage;
   private int cellNumber, result;
   private boolean makeMoveAsZero;
-
+  private ServerThread serverThread;
   ButtonController(Button[][] tempArrayOfButtons, GameLogic tempField, Stage tempStage) {
     arrayOfButtons = tempArrayOfButtons;
     field = tempField;
@@ -42,7 +43,18 @@ public class ButtonController implements Constants {
       System.out.println("one of these files is missing: zero.png cross.png empty.png");
       System.exit(1);
     }
-  }
+    serverThread = new ServerThread(field);
+    serverThread.start();
+    stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+      @Override // stop server thread when client closes
+      public void handle(WindowEvent event) {
+        serverThread.finalize();
+        synchronized (serverThread) {
+          serverThread.notify();
+        }
+      }
+    });
+    }
   /**
    * Resets buttons and field to initial state
    */
@@ -124,9 +136,20 @@ public class ButtonController implements Constants {
       }
       field.switchMode(CROSS_MARK);
       if (result != NO_RESULT) {
-        cellNumber = field.checkCell(result % field.fieldSize, result / field.fieldSize);
-        if (cellNumber != NO_RESULT) {                   //get cell number for next turn
-          //set button picture
+        int posX = result % field.fieldSize;
+        int posY = result / field.fieldSize;
+        serverThread.setPosition(posX, posY);
+        try {
+          synchronized (serverThread) {
+            serverThread.notify();
+            serverThread.wait();
+          }
+        } catch (InterruptedException exception) {
+          exception.printStackTrace();
+        }
+        cellNumber = serverThread.getResult();
+        if (cellNumber != NO_RESULT) { // get cell number for next turn
+          // set button picture
           arrayOfButtons[cellNumber / field.fieldSize][cellNumber % field.fieldSize]
               .setGraphic(new ImageView(imageCross));
         }
@@ -140,9 +163,20 @@ public class ButtonController implements Constants {
       }
       field.switchMode(ZERO_MARK);
       if (cellNumber != NO_RESULT) {
-        result = field.checkCell(cellNumber % field.fieldSize, cellNumber / field.fieldSize);
-        if (result != NO_RESULT) {                        //get cell number for next turn
-        //set button picture
+        int posX = cellNumber % field.fieldSize;
+        int posY = cellNumber / field.fieldSize;
+        serverThread.setPosition(posX, posY);
+        try {
+          synchronized (serverThread) {
+            serverThread.notify();
+            serverThread.wait();
+          }
+        } catch (InterruptedException exception) {
+          exception.printStackTrace();
+        }
+        result = serverThread.getResult();
+        if (result != NO_RESULT) { // get cell number for next turn
+          // set button picture
           arrayOfButtons[result / field.fieldSize][result % field.fieldSize]
               .setGraphic(new ImageView(imageZero));
         }
@@ -207,7 +241,19 @@ public class ButtonController implements Constants {
   };
 
   int showReplayTurn() {
-    if (field.loadTurnFromReplay() == false) {
+    serverThread.setMode(REPLAY_MODE);
+    synchronized (serverThread) {
+      serverThread.notify();
+    }
+    try {
+      synchronized (serverThread) {
+        serverThread.wait();
+      }
+    } catch (InterruptedException exception) {
+      exception.printStackTrace();
+    }
+    if (serverThread.getResult() == NO_RESULT) {
+      serverThread.setMode(PLAY_MODE);
       return STOP_REPLAY;
     }
     try {
@@ -259,7 +305,18 @@ public class ButtonController implements Constants {
       } else {
         return;
       }
-      result = field.checkCell(j, i); // result = cell that A.I. selected to make turn
+      serverThread.setPosition(j, i);
+      try {
+        synchronized (serverThread) {
+          serverThread.notify();
+          serverThread.wait();
+        }
+      } catch (InterruptedException exception) {
+        exception.printStackTrace();
+        return;
+      }
+      result = serverThread.getResult();
+      // result = cell that A.I. selected to make turn
     }
 
     int gameState = field.checkWin();
