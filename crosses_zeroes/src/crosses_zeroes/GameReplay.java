@@ -35,7 +35,7 @@ class GameReplay implements Constants {
         bufferArray = getState(currentTurn);
         for (int i = 0; i < field.fieldSize; i++)
           for (int j = 0; j < field.fieldSize; j++) {
-            gameStateStream.writeInt(bufferArray[i][j]);
+            gameStateStream.write((byte)bufferArray[i][j]);
           }
       }
       gameStateStream.close();
@@ -95,7 +95,7 @@ class GameReplay implements Constants {
         int[][] bufferArray = new int[field.fieldSize][field.fieldSize];
         for (int i = 0; i < field.fieldSize; i++)
           for (int j = 0; j < field.fieldSize; j++) {
-            bufferArray[i][j] = gameStateStream.readInt();
+            bufferArray[i][j] = (int)gameStateStream.read();
           }
         gameStates.add(bufferArray);    // add one more state
       }

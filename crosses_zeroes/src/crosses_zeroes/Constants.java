@@ -22,7 +22,7 @@ public interface Constants {
   final int BELONGS_TO_WIN_COMBINATION = 1;
   final int DOESNT_BELONG_TO_WIN_COMBINATION = 0;
   final int STOP_REPLAY = 1;
-  final int FIRST_TURN = 1;
+  final int SECOND_TURN = 2;
   final int THIRD_TURN = 3;
   final int WINDOW_LENGTH = 450; // window size
   final int WINDOW_HEIGTH = 130;
