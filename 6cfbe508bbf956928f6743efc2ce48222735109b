@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "baa041b7_9326dccc",
+        "filename": "crosses_zeroes/src/crosses_zeroes/ButtonController.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1007635
+      },
+      "writtenOn": "2016-04-21T15:16:02Z",
+      "side": 1,
+      "message": "move to constructor",
+      "range": {
+        "startLine": 32,
+        "startChar": 35,
+        "endLine": 32,
+        "endChar": 57
+      },
+      "revId": "6cfbe508bbf956928f6743efc2ce48222735109b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa041b7_5307341c",
+        "filename": "crosses_zeroes/src/crosses_zeroes/ButtonController.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1007635
+      },
+      "writtenOn": "2016-04-21T15:16:02Z",
+      "side": 1,
+      "message": "out of dotted line",
+      "range": {
+        "startLine": 48,
+        "startChar": 100,
+        "endLine": 48,
+        "endChar": 102
+      },
+      "revId": "6cfbe508bbf956928f6743efc2ce48222735109b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa041b7_5e0f3b2e",
+        "filename": "crosses_zeroes/src/crosses_zeroes/ServerThread.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1007635
+      },
+      "writtenOn": "2016-04-21T15:16:02Z",
+      "side": 1,
+      "message": "can be private with getters and setters",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 36
+      },
+      "revId": "6cfbe508bbf956928f6743efc2ce48222735109b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
