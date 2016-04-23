@@ -3,9 +3,12 @@ package crosses_zeroes;
 import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
@@ -18,6 +21,7 @@ public class UserInterface implements Constants {
   private ButtonController buttons;
   private GameLogic field;
   private Pane root;
+  private Scene mainWindowScene;
   File gameReplayFile;
   Stage mainStage;
   UserInterface(ButtonController tempButtons, GameLogic tempField, Pane tempRoot, Stage tempStage) {
@@ -159,8 +163,95 @@ public class UserInterface implements Constants {
       }
     });
 
+    TextField sortTime = new TextField();
+    sortTime.setTranslateY(145);
+    sortTime.setTranslateX(10);
+    sortTime.setPrefSize(150, 15);
+
+    Button scalaSortButton = new Button("Сорт. Scala по поз. ходов");
+    scalaSortButton.setTranslateX(10);
+    scalaSortButton.setTranslateY(35);
+    scalaSortButton.setPrefSize(300, 10);
+    scalaSortButton.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        ScalaSorter sorter = new ScalaSorter();
+        long startTime = System.currentTimeMillis();
+        sorter.sort(0, 99999,SORT_BY_POSITIONS);
+        long stopTime = System.currentTimeMillis() - startTime;
+        sortTime.setText(Long.toString(stopTime));        
+      }
+    });
+
+    Button javaSortButton = new Button("Сорт. java по поз. ходов");
+    javaSortButton.setTranslateX(10);
+    javaSortButton.setTranslateY(5);
+    javaSortButton.setPrefSize(300, 10);
+    javaSortButton.setOnAction(new EventHandler<ActionEvent>() {
+      public void handle(ActionEvent event) {
+        JavaSorter sorter = new JavaSorter(0,99999);
+        long startTime = System.currentTimeMillis();
+        sorter.sort(SORT_BY_POSITIONS);
+        long stopTime = System.currentTimeMillis() - startTime;
+        sortTime.setText(Long.toString(stopTime));
+      }
+    });
+
+    Button javaQuickSort = new Button("Сорт. java по числу ходов");
+    javaQuickSort.setTranslateX(10);
+    javaQuickSort.setTranslateY(105);
+    javaQuickSort.setPrefSize(300, 10);
+    javaQuickSort.setOnAction(new EventHandler<ActionEvent>() {
+      public void handle(ActionEvent event) {
+        JavaSorter sorter = new JavaSorter(0,99999);
+        sorter.sort(SORT_BY_TURNS_NUMBER);
+      }
+    });
+
+    Button scalaQuickSort = new Button("Сорт. Scala по числу ходов");
+    scalaQuickSort.setTranslateX(10);
+    scalaQuickSort.setTranslateY(65);
+    scalaQuickSort.setPrefSize(300, 10);
+    scalaQuickSort.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        ScalaSorter sorter = new ScalaSorter();
+        sorter.sort(0, 99999,SORT_BY_TURNS_NUMBER);
+      }
+    });
+
+    Pane sortPane = new Pane();
+    Scene sortScene = new Scene(sortPane, 330, 175);
+
+    Button showSort = new Button("Сортировки"); // show sort menu
+    showSort.setTranslateX(350);
+    showSort.setTranslateY(90);
+    showSort.setPrefSize(100, 30);
+    showSort.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        mainWindowScene = mainStage.getScene();
+        mainStage.setScene(sortScene);
+        mainStage.show();
+      }
+    });
+
+    Button closeSort = new Button("Закрыть"); // close sort menu
+    closeSort.setTranslateX(160);
+    closeSort.setTranslateY(145);
+    closeSort.setPrefSize(150, 15);
+    closeSort.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        mainStage.setScene(mainWindowScene);
+        mainStage.show();
+      }
+    });
+
+    sortPane.getChildren().addAll(javaSortButton,scalaSortButton,closeSort,
+        scalaQuickSort, javaQuickSort, sortTime);
     root.getChildren().addAll(newGameButton, radioThree, radioFour, sizeLabel,
-        levelLabel, radioHard, radioMedium);
+        levelLabel, radioHard, radioMedium, showSort);
     root.getChildren().addAll(autoGameButton, radioEasy, loadButton, saveButton);
   }
 }
