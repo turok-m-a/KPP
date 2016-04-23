@@ -29,4 +29,8 @@ public interface Constants {
   final int DEFAULT_FIELD_SIZE = 3;
   final int PLAY_MODE = 0;
   final int REPLAY_MODE = 1;
+  final int REPLAY_HEADER_OFFSET = 8;
+  final int TURNS_NUMBER_OFFSET = 3;
+  final int SORT_BY_POSITIONS = 0;
+  final int SORT_BY_TURNS_NUMBER = 1;
 }
