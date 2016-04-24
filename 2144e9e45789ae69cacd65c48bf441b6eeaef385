@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "baa041b7_076283ad",
+        "filename": "crosses_zeroes/src/crosses_zeroes/JavaSorter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1007608
+      },
+      "writtenOn": "2016-04-24T15:39:29Z",
+      "side": 1,
+      "message": "sortMode",
+      "range": {
+        "startLine": 24,
+        "startChar": 23,
+        "endLine": 24,
+        "endChar": 31
+      },
+      "revId": "2144e9e45789ae69cacd65c48bf441b6eeaef385",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
