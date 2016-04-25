@@ -242,11 +242,9 @@ public class ButtonController implements Constants {
 
   int showReplayTurn() {
     serverThread.setMode(REPLAY_MODE);
-    synchronized (serverThread) {
-      serverThread.notify();
-    }
     try {
       synchronized (serverThread) {
+        serverThread.notify();
         serverThread.wait();
       }
     } catch (InterruptedException exception) {
