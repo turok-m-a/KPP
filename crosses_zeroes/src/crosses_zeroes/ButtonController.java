@@ -24,6 +24,7 @@ public class ButtonController implements Constants {
   private Image imageZero;
   private Image imageCross;
   private Image imageEmpty;
+  private Image imageGradient;
   private Button[][] arrayOfButtons;
   private GameLogic field;
   private Stage stage;

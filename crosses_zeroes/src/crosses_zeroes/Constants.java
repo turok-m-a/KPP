@@ -24,7 +24,7 @@ public interface Constants {
   final int STOP_REPLAY = 1;
   final int SECOND_TURN = 2;
   final int THIRD_TURN = 3;
-  final int WINDOW_LENGTH = 450; // window size
+  final int WINDOW_LENGTH = 460; // window size
   final int WINDOW_HEIGTH = 130;
   final int DEFAULT_FIELD_SIZE = 3;
   final int PLAY_MODE = 0;
@@ -33,4 +33,5 @@ public interface Constants {
   final int TURNS_NUMBER_OFFSET = 3;
   final int SORT_BY_POSITIONS = 0;
   final int SORT_BY_TURNS_NUMBER = 1;
+  final int NUMBER_OF_REPLAYS = 99999;
 }

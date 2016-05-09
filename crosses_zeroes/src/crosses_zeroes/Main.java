@@ -3,6 +3,8 @@ package crosses_zeroes;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -31,6 +33,8 @@ public class Main extends Application implements Constants {
         arrayOfButtons[i][j] = new Button();
         grid.add(arrayOfButtons[i][j], j, i);
       }
+    ImageView background = new ImageView(new Image("gradient.png", 500, 250, false, true));
+    root.getChildren().add(background);
     root.getChildren().add(grid);
     ButtonController buttons = new ButtonController(arrayOfButtons, field, primaryStage);
     buttons.initButtons();
