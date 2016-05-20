@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.control.OverrunStyle;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -17,6 +18,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import scala.Int;
+import scala.Tuple2;
 
 /**
  * adds GUI elements to Pane
@@ -44,6 +47,9 @@ public class UserInterface implements Constants {
     final ImageView newGameImage = new ImageView(new Image("newgame.png"));
     final ImageView autoGameImage = new ImageView(new Image("computer.png"));
     final ImageView optionsImage = new ImageView(new Image("options.png"));
+    final ImageView sortingImage = new ImageView(new Image("sorting.png"));
+    final ImageView statisticsImage = new ImageView(new Image("chart.png"));
+    final ImageView sequencesImage = new ImageView(new Image("copy_file.png"));
 
     Label sizeLabel = new Label();
     sizeLabel.setText("Размер поля:");
@@ -244,7 +250,8 @@ public class UserInterface implements Constants {
     sortPane.getChildren().add(sortBackground);
     Scene sortScene = new Scene(sortPane, 320, 155);
 
-    Button showSort = new Button("Сортировки"); // show sort menu
+    Button showSort = new Button("Сортировки",sortingImage); // show sort menus
+    showSort.setContentDisplay(ContentDisplay.LEFT);
     showSort.setTranslateX(10);
     showSort.setTranslateY(10);
     showSort.setPrefSize(125, 30);
@@ -262,9 +269,10 @@ public class UserInterface implements Constants {
     Scene statisticsScene = new Scene(statisticsPane, 320, 155);
     statisticsPane.getChildren().add(statisticsBackground);
 
-    Button showStatistics = new Button("Статистика"); // show sort menu
+    Button showStatistics = new Button("Статистика",statisticsImage); // show sort menu
+    showStatistics.setContentDisplay(ContentDisplay.LEFT);
     showStatistics.setTranslateX(10);
-    showStatistics.setTranslateY(50);
+    showStatistics.setTranslateY(45);
     showStatistics.setPrefSize(125, 30);
     showStatistics.setOnAction(new EventHandler<ActionEvent>() {
       @Override
@@ -273,9 +281,19 @@ public class UserInterface implements Constants {
         mainStage.show();
       }
     });
-
+    ImageView optionsBackground = new ImageView(new Image("gradient2.png", 500, 500,
+        false, true));
+    ImageView sequencesBackground = new ImageView(new Image("gradient2.png", 500, 500,
+        false, true));
     Pane optionsPane = new Pane();
     Scene optionsScene = new Scene(optionsPane, 320, 155);
+    optionsPane.getChildren().add(optionsBackground);
+    Pane sequencesPane = new Pane();
+    Scene sequencesScene = new Scene(sequencesPane, 320, 155);
+    sequencesPane.getChildren().add(sequencesBackground);
+    Label sequenceInfo = new Label();
+    sequenceInfo.setTranslateX(10);
+    sequenceInfo.setTranslateY(5);
 
     Button closeSort = new Button("Закрыть"); // close sort menu
     closeSort.setTranslateX(160);
@@ -303,7 +321,7 @@ public class UserInterface implements Constants {
 
     Button closeOptions = new Button("Закрыть"); // close options menu
     closeOptions.setTranslateX(10);
-    closeOptions.setTranslateY(90);
+    closeOptions.setTranslateY(80);
     closeOptions.setPrefSize(125, 30);
     closeOptions.setOnAction(new EventHandler<ActionEvent>() {
       @Override
@@ -351,12 +369,44 @@ public class UserInterface implements Constants {
       public void handle(ActionEvent event) {
         Statistics st = new Statistics();
         Integer turn = new Integer(turnSelect.getText());
-        int[] statistics =  st.countStatistics(0, 50000, turn);
+        int[] statistics =  st.countStatistics(0, 50, turn);
         int currentSize = field.fieldSize;
         for (int i = 0; i < currentSize; i++)
           for (int j = 0; j < currentSize; j++) {
             arrayOfLabels[i][j].setText(Integer.toString(statistics[i*currentSize+j]));
           }
+      }
+    });
+
+    Button findSequence = new Button("Повторы",sequencesImage);
+    findSequence.setContentDisplay(ContentDisplay.LEFT);
+    findSequence.setTranslateX(10);
+    findSequence.setTranslateY(115);
+    findSequence.setPrefSize(125, 30);
+    findSequence.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        mainStage.setScene(sequencesScene);
+        mainStage.show();
+        SequenceFinder sf = new SequenceFinder();
+        int result[] = sf.findSequence();
+        sequenceInfo.setText("Наиболее часто встречающаяся\nпоследовательность: "
+           + Integer.toString(result[0]) + "\nПовторов последовательности: "
+           + Integer.toString(result[1]) + "\n\nНаименее часто встречающаяся\nпоследовательность: "
+           + Integer.toString(result[2]) + "\nПовторов последовательности: "
+           + Integer.toString(result[3]));
+      }
+    });
+
+    Button closeSequences = new Button("Закрыть"); // close sequences menu
+    closeSequences.setTranslateX(10);
+    closeSequences.setTranslateY(120);
+    closeSequences.setPrefSize(300, 30);
+    closeSequences.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        mainStage.setScene(optionsScene);
+        mainStage.show();
       }
     });
 
@@ -367,12 +417,13 @@ public class UserInterface implements Constants {
         statisticsGrid.add(arrayOfLabels[i][j], j, i);
       }
     optionsPane.getChildren().addAll(showSort, showStatistics, radioThree, radioFour, sizeLabel,
-        levelLabel, radioHard, radioMedium, radioEasy, closeOptions);
+        levelLabel, radioHard, radioMedium, radioEasy, closeOptions, findSequence);
     statisticsPane.getChildren().addAll(closeStatistics,statisticsGrid,statistics,
         turnSelect, info, turnSelectInfo);
     sortPane.getChildren().addAll(javaSortButton,scalaSortButton,closeSort,
         scalaQuickSort, javaQuickSort, sortTime, showOptions);
     root.getChildren().addAll(newGameButton, autoGameButton, loadButton, saveButton,
         showOptions);
+    sequencesPane.getChildren().addAll(sequenceInfo, closeSequences);
   }
 }
