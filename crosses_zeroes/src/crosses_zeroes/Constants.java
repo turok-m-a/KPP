@@ -33,5 +33,5 @@ public interface Constants {
   final int TURNS_NUMBER_OFFSET = 3;
   final int SORT_BY_POSITIONS = 0;
   final int SORT_BY_TURNS_NUMBER = 1;
-  final int NUMBER_OF_REPLAYS = 99999;
+  final int NUMBER_OF_REPLAYS = 10000;
 }
